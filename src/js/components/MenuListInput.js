@@ -52,14 +52,6 @@ export default class MenuListInput extends Component {
     ];
   }
 
-  initState() {
-    super.initState();
-
-    this.state = {
-      inputValue: "",
-    };
-  }
-
   inputValueChangeListener(event) {
     // console.log("inputValueChangeListener");
 

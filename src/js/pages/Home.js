@@ -62,13 +62,6 @@ export default class Home extends Component {
   </div>`;
   }
 
-  initState() {
-    this.state = {
-      menu: [],
-      menuId: 0,
-    };
-  }
-
   addMenu(newMenu) {
     if (newMenu.trim() === "") {
       alert("빈 값은 추가할 수 없습니다.");
@@ -124,12 +117,12 @@ export default class Home extends Component {
       "#espresso-menu-list-wrapper"
     );
 
-    const menuListInput = new MenuListInput(MenuFormWrapper, {
+    const menuListInput = new MenuListInput(MenuFormWrapper, this.store, {
       menu: this.state.menu,
       addMenu: this.addMenu.bind(this),
     });
 
-    const menuList = new MenuList(MenuListWrapper, {
+    const menuList = new MenuList(MenuListWrapper, this.store, {
       menu: this.state.menu,
       removeMenu: this.removeMenu.bind(this),
       editMenu: this.editMenu.bind(this),
@@ -149,12 +142,12 @@ export default class Home extends Component {
       "#espresso-menu-list-wrapper"
     );
 
-    const menuListInput = new MenuListInput(MenuFormWrapper, {
+    const menuListInput = new MenuListInput(MenuFormWrapper, this.store, {
       menu: this.state.menu,
       addMenu: this.addMenu.bind(this),
     });
 
-    const menuList = new MenuList(MenuListWrapper, {
+    const menuList = new MenuList(MenuListWrapper, this.store, {
       menu: this.state.menu,
       removeMenu: this.removeMenu.bind(this),
       editMenu: this.editMenu.bind(this),

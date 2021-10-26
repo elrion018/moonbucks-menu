@@ -5,7 +5,7 @@ export default class App extends Component {
   created() {
     super.created();
 
-    const home = new Home(this.targetElement, null);
+    const home = new Home(this.targetElement, this.store, null);
 
     this.childrenComponents = [home];
   }
@@ -13,7 +13,7 @@ export default class App extends Component {
   updated() {
     super.updated();
 
-    const home = new Home(this.targetElement, null);
+    const home = new Home(this.targetElement, this.store, null);
 
     this.childrenComponents = [home];
   }
