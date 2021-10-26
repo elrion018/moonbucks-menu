@@ -1,4 +1,7 @@
 import App from "./App.js";
+import Store from "./cores/Store.js";
 
 const app = document.querySelector("#app");
-new App(app, null);
+const store = new Store();
+
+new App(app, store, null);

@@ -2,11 +2,13 @@ export default class Component {
   props;
   state;
   targetElement;
+  store;
   listenerInfos;
   childrenComponents;
 
-  constructor(targetElement, props) {
+  constructor(targetElement, store, props) {
     this.props = props;
+    this.store = store;
     this.targetElement = targetElement;
     this.listenerInfos = [];
     this.childrenComponents = [];
