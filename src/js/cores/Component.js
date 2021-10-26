@@ -36,9 +36,13 @@ export default class Component {
 
   // state에 변화를 주는 메소드
   setState(state) {
-    // state parameter 는 object만 허용
-    if (state.constructor === Object) {
+    try {
+      // state parameter 는 object만 허용
+      if (state.constructor !== Object)
+        throw new Error("state 파라미터로 객체만 넣을 수 있습니다.");
+
       // 이벤트 큐의 뒤로 밀어버리기 위해 사용
+
       setTimeout(
         function () {
           // 불변성 유지
@@ -50,7 +54,9 @@ export default class Component {
         }.bind(this),
         0
       );
-    } else alert("state 파라미터로 객체만 넣을 수 있습니다.");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   // event targets에 이벤트 리스너들을 달기위한 메소드

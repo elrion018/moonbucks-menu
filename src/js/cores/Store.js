@@ -2,8 +2,6 @@ export default class Store {
   data = {};
   subscribers = [];
 
-  constructor() {}
-
   // 자신을 구독하는 컴포넌트를 등록하는 메서드
   registerSubscriber(subscriber) {
     this.subscribers.push(subscriber);
@@ -15,6 +13,9 @@ export default class Store {
       subscriber.setState(this.data);
     });
   }
+
+  // 상태변경을 리듀서에 요청하는 메소드
+  dispatch() {}
 
   // data getter 메소드
   getData() {
