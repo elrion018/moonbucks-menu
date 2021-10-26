@@ -1,10 +1,10 @@
 import Store from "../../cores/Store.js";
 
 export default class EspressoMenuStore extends Store {
-  constructor() {
-    super();
+  constructor(reducer) {
+    super(reducer);
 
-    this.setData({
+    this.setState({
       menu: [],
       menuId: 0,
       inputValue: "",

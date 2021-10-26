@@ -69,9 +69,11 @@ export default class Home extends Component {
       return false;
     }
 
-    this.setState({
-      menu: [...this.state.menu, { name: newMenu, id: this.state.menuId }],
-      menuId: this.state.menuId + 1,
+    this.store.dispatch({
+      actionType: "addMenu",
+      payload: {
+        newMenu,
+      },
     });
   }
 
@@ -81,12 +83,12 @@ export default class Home extends Component {
     const targetMenuIndex = this.state.menu.findIndex(
       (item) => item.id === Number(key)
     );
-    let copiedMenu = [...this.state.menu];
 
-    copiedMenu.splice(targetMenuIndex, 1);
-
-    this.setState({
-      menu: copiedMenu,
+    this.store.dispatch({
+      actionType: "removeMenu",
+      payload: {
+        targetMenuIndex,
+      },
     });
   }
 
@@ -98,11 +100,13 @@ export default class Home extends Component {
     const targetMenuIndex = this.state.menu.findIndex(
       (item) => item.id === Number(key)
     );
-    let copiedMenu = [...this.state.menu];
-    copiedMenu[targetMenuIndex].name = newName.toLowerCase();
 
-    this.setState({
-      menu: copiedMenu,
+    this.store.dispatch({
+      actionType: "editMenu",
+      payload: {
+        targetMenuIndex,
+        newName,
+      },
     });
   }
 

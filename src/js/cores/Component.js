@@ -86,6 +86,7 @@ export default class Component {
   created() {
     // console.log("created ...");
 
+    this.observeStore();
     this.initState();
     this.render();
   }
