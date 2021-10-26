@@ -26,7 +26,7 @@ export default class Component {
   // state를 초기화하는 메소드
   initState() {
     // console.log("initState");
-    this.state = this.store.getData();
+    this.state = this.store.getState();
   }
 
   // store를 구독하는 메소드

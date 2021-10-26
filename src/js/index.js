@@ -1,7 +1,8 @@
 import App from "./App.js";
-import MenuStore from "./flux/stores/MeunStore.js";
+import EspressoMenuStore from "./flux/stores/EspressoMeunStore.js";
+import EspressoMenuReducer from "./flux/reducers/EspressoMenuReducer.js";
 
 const app = document.querySelector("#app");
-const menuStore = new MenuStore();
+const espressoMenuStore = new EspressoMenuStore(new EspressoMenuReducer());
 
-new App(app, menuStore, null);
+new App(app, espressoMenuStore, null);

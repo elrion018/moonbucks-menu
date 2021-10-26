@@ -1,29 +1,36 @@
 export default class Store {
-  data = {};
+  state = {};
   subscribers = [];
+  reducer;
+
+  constructor(reducer) {
+    this.reducer = reducer;
+  }
 
   // 자신을 구독하는 컴포넌트를 등록하는 메서드
   registerSubscriber(subscriber) {
     this.subscribers.push(subscriber);
   }
 
-  // data의 변경사항을 알리는 메소드
+  // state 변경사항을 알리는 메소드
   notifyChanges() {
     this.subscribers.forEach((subscriber) => {
-      subscriber.setState(this.data);
+      subscriber.setState(this.state);
     });
   }
 
-  // 상태변경을 리듀서에 요청하는 메소드
-  dispatch() {}
+  // action을 받아 상태변경을 리듀서에 요청하는 메소드
+  dispatch(action) {
+    this.state = this.reducer.reduce(this.state, action);
+  }
 
-  // data getter 메소드
-  getData() {
-    return { ...this.data };
+  // state getter 메소드
+  getState() {
+    return { ...this.state };
   }
 
   // data setter 메소드
-  setData(data) {
-    this.data = data;
+  setState(state) {
+    this.state = state;
   }
 }

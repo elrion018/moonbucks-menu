@@ -1,6 +1,6 @@
 import Store from "../../cores/Store.js";
 
-export default class MenuStore extends Store {
+export default class EspressoMenuStore extends Store {
   constructor() {
     super();
 
