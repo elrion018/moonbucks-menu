@@ -70,6 +70,10 @@ export default class MenuListInput extends Component {
     setTimeout(
       function () {
         this.props.addMenu(this.state.inputValue);
+
+        this.setState({
+          inputValue: "",
+        });
       }.bind(this),
       0
     );

@@ -15,7 +15,7 @@ export default class EspressoMenuReducer extends Reducer {
         return {
           ...state,
           menu: [...state.menu, { name: newMenu, id: state.menuId }],
-          menuId: state.menuId++,
+          menuId: state.menuId + 1,
         };
       },
 

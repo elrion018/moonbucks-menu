@@ -1,4 +1,5 @@
 export default class Store {
+  prevState = {};
   state = {};
   subscribers = [];
   reducer;
@@ -24,6 +25,7 @@ export default class Store {
 
   // state 변경사항을 알리는 메소드
   notifyChanges() {
+    console.log(this.subscribers);
     this.subscribers.forEach((subscriber) => {
       subscriber.setState(this.state);
     });

@@ -84,6 +84,10 @@ export default class Home extends Component {
     ];
   }
 
+  observeStore() {
+    this.store.registerSubscriber(this)
+  }
+
   addMenu(newMenu) {
     if (newMenu.trim() === "") {
       alert("빈 값은 추가할 수 없습니다.");

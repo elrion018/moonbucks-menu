@@ -37,9 +37,7 @@ export default class Component {
   }
 
   // store를 구독하는 메소드
-  observeStore() {
-    this.store.registerSubscriber(this);
-  }
+  observeStore() {}
 
   // state에 변화를 주는 메소드
   setState(state) {
@@ -73,8 +71,6 @@ export default class Component {
   setComponentInstances() {
     this.componentInstances = this.components.map((component) => {
       let { constructor: Constructor, targetSelector, props } = component;
-
-      console.log(props);
 
       return new Constructor(targetSelector, this.store, props);
     });
