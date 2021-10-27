@@ -62,6 +62,28 @@ export default class Home extends Component {
   </div>`;
   }
 
+  initComponents() {
+    this.components = [
+      {
+        constructor: MenuList,
+        targetSelector: "#espresso-menu-list-wrapper",
+        props: {
+          menu: this.state.menu,
+          removeMenu: this.removeMenu.bind(this),
+          editMenu: this.editMenu.bind(this),
+        },
+      },
+      {
+        constructor: MenuListInput,
+        targetSelector: "#espresso-menu-form-wrapper",
+        props: {
+          menu: this.state.menu,
+          addMenu: this.addMenu.bind(this),
+        },
+      },
+    ];
+  }
+
   addMenu(newMenu) {
     if (newMenu.trim() === "") {
       alert("빈 값은 추가할 수 없습니다.");
@@ -108,55 +130,5 @@ export default class Home extends Component {
         newName,
       },
     });
-  }
-
-  created() {
-    super.created();
-
-    const MenuFormWrapper = this.targetElement.querySelector(
-      "#espresso-menu-form-wrapper"
-    );
-
-    const MenuListWrapper = this.targetElement.querySelector(
-      "#espresso-menu-list-wrapper"
-    );
-
-    const menuListInput = new MenuListInput(MenuFormWrapper, this.store, {
-      menu: this.state.menu,
-      addMenu: this.addMenu.bind(this),
-    });
-
-    const menuList = new MenuList(MenuListWrapper, this.store, {
-      menu: this.state.menu,
-      removeMenu: this.removeMenu.bind(this),
-      editMenu: this.editMenu.bind(this),
-    });
-
-    this.childrenComponents = [menuListInput, menuList];
-  }
-
-  updated() {
-    super.updated();
-
-    const MenuFormWrapper = this.targetElement.querySelector(
-      "#espresso-menu-form-wrapper"
-    );
-
-    const MenuListWrapper = this.targetElement.querySelector(
-      "#espresso-menu-list-wrapper"
-    );
-
-    const menuListInput = new MenuListInput(MenuFormWrapper, this.store, {
-      menu: this.state.menu,
-      addMenu: this.addMenu.bind(this),
-    });
-
-    const menuList = new MenuList(MenuListWrapper, this.store, {
-      menu: this.state.menu,
-      removeMenu: this.removeMenu.bind(this),
-      editMenu: this.editMenu.bind(this),
-    });
-
-    this.childrenComponents = [menuListInput, menuList];
   }
 }

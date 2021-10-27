@@ -23,6 +23,8 @@ export default class MenuList extends Component {
   getMenuListItems() {
     const { menu } = this.props;
 
+    console.log(menu);
+
     return menu.map(
       (item) =>
         `<li class="espresson-menu-item" data-key="${item.id}">${item.name}<button data-purpose="edit">수정</button> <button data-purpose="delete">삭제</button></li>`

@@ -12,9 +12,18 @@ export default class Store {
     this.subscribers.push(subscriber);
   }
 
+  removeDestroyedSubscribers(destoryedSubscribers) {
+    const newSubscribers = this.subscribers.filter((subscriber) => {
+      return !destoryedSubscribers.some((destoryedSubscriber) => {
+        return Object.is(destoryedSubscriber, subscriber);
+      });
+    });
+
+    this.subscribers = newSubscribers;
+  }
+
   // state 변경사항을 알리는 메소드
   notifyChanges() {
-    console.log(this.subscribers);
     this.subscribers.forEach((subscriber) => {
       subscriber.setState(this.state);
     });
@@ -25,8 +34,6 @@ export default class Store {
   dispatch(action) {
     this.state = this.reducer.reduce(this.state, action);
 
-    console.log(this.state);
-
     this.notifyChanges();
   }
 
@@ -35,8 +42,18 @@ export default class Store {
     return { ...this.state };
   }
 
+  // subscriber getter 메소드
+  getSubcriber() {
+    return [...this.subscribers];
+  }
+
   // data setter 메소드
   setState(state) {
     this.state = state;
+  }
+
+  // subscriber setter 메소드
+  setSubscribers(subscribers) {
+    this.subscribers = subscribers;
   }
 }

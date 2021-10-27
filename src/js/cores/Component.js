@@ -1,17 +1,21 @@
 export default class Component {
   props;
   state;
-  targetElement;
   store;
   listenerInfos;
-  childrenComponents;
+  targetSelector;
+  targetElement;
+  components;
+  componentInstances;
 
-  constructor(targetElement, store, props) {
+  constructor(targetSelector, store, props) {
+    this.components = [];
+    this.componentInstances = [];
+    this.listenerInfos = [];
     this.props = props;
     this.store = store;
-    this.targetElement = targetElement;
-    this.listenerInfos = [];
-    this.childrenComponents = [];
+    this.targetSelector = targetSelector;
+    this.targetElement = document.querySelector(targetSelector);
 
     this.created();
     this.beforeMounted();
@@ -22,6 +26,9 @@ export default class Component {
   initListenerInfos() {
     // console.log("initListenerInfos");
   }
+
+  // components들을 init 하는 메소드
+  initComponents() {}
 
   // state를 초기화하는 메소드
   initState() {
@@ -59,6 +66,20 @@ export default class Component {
     }
   }
 
+  setProps(props) {
+    this.props = props;
+  }
+
+  setComponentInstances() {
+    this.componentInstances = this.components.map((component) => {
+      let { constructor: Constructor, targetSelector, props } = component;
+
+      console.log(props);
+
+      return new Constructor(targetSelector, this.store, props);
+    });
+  }
+
   // event targets에 이벤트 리스너들을 달기위한 메소드
   setEventListeners() {
     this.listenerInfos.forEach(({ eventTarget, eventType, listener }) => {
@@ -88,7 +109,9 @@ export default class Component {
 
     this.observeStore();
     this.initState();
+    this.initComponents();
     this.render();
+    this.setComponentInstances();
   }
 
   // 기초적인 beforeMounted 라이프사이클
@@ -110,12 +133,21 @@ export default class Component {
   // 기초적인 updated 라이프사이클.
   // 완벽히 구현하려면 ... 나중에 virtual dom 추가해서 구현해보기
   updated() {
+    this.targetElement = document.querySelector(this.targetSelector);
     this.render();
     this.setEventListeners();
+    this.initComponents();
 
-    // this.childrenComponents.map((childComponent) => {
-    //   childComponent.updated();
-    // });
+    // props를 새롭게 갱신하고 인스턴스들에 update를 유발한다.
+    if (!this.componentInstances.length) return;
+    this.componentInstances.forEach((componentInstance) => {
+      const { props: newProps } = this.components.find((component) => {
+        return componentInstance.constructor === component.constructor;
+      });
+
+      componentInstance.setProps(newProps);
+      componentInstance.updated();
+    });
   }
 
   // 컴포넌트의 템플릿을 만드는 메소드. todo : 나중에 Virtual dom 적용해볼 것

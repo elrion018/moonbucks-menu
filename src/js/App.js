@@ -2,19 +2,17 @@ import Component from "./cores/Component.js";
 import Home from "./pages/Home.js";
 
 export default class App extends Component {
-  created() {
-    super.created();
-
-    const home = new Home(this.targetElement, this.store, null);
-
-    this.childrenComponents = [home];
+  makeTemplate() {
+    return `<div id="home"></div>`;
   }
 
-  updated() {
-    super.updated();
-
-    const home = new Home(this.targetElement, this.store, null);
-
-    this.childrenComponents = [home];
+  initComponents() {
+    this.components = [
+      {
+        constructor: Home,
+        targetSelector: "#home",
+        props: null,
+      },
+    ];
   }
 }
