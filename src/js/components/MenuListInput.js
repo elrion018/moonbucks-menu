@@ -28,6 +28,12 @@ export default class MenuListInput extends Component {
   </form>`;
   }
 
+  initState() {
+    this.state = {
+      inputValue: "",
+    };
+  }
+
   initListenerInfos() {
     super.initListenerInfos();
 

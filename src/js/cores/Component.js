@@ -1,6 +1,6 @@
 export default class Component {
   props;
-  state;
+  state = {};
   store;
   listenerInfos;
   targetSelector;
@@ -81,6 +81,10 @@ export default class Component {
     this.listenerInfos.forEach(({ eventTarget, eventType, listener }) => {
       eventTarget.addEventListener(eventType, listener);
     });
+  }
+
+  getState() {
+    return { ...this.state };
   }
 
   // event targets에 이벤트 리스너들을 제거하기 위한 메소드

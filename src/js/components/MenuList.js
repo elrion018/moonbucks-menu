@@ -1,9 +1,14 @@
 import Component from "../cores/Component.js";
 
 export default class MenuList extends Component {
-  initListenerInfos() {
-    super.initListenerInfos();
+  makeTemplate() {
+    return `<ul id="espresso-menu-list" class="mt-3 pl-0">
+      ${this.getMenuListItems().join("")}
+    
+    </ul>`;
+  }
 
+  initListenerInfos() {
     this.listenerInfos = [
       {
         eventTarget: this.targetElement.querySelector("#espresso-menu-list"),
@@ -11,13 +16,6 @@ export default class MenuList extends Component {
         listener: this.itemButtonClickListener.bind(this),
       },
     ];
-  }
-
-  makeTemplate() {
-    return `<ul id="espresso-menu-list" class="mt-3 pl-0">
-      ${this.getMenuListItems().join("")}
-    
-    </ul>`;
   }
 
   getMenuListItems() {

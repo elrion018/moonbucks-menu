@@ -7,7 +7,7 @@ export default class EspressoMenuStore extends Store {
     this.setState({
       menu: [],
       menuId: 0,
-      inputValue: "",
+      test: "",
     });
   }
 }

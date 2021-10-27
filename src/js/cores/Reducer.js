@@ -29,6 +29,6 @@ export default class Reducer {
       return this.actionTypes[actionType](state, payload);
 
     // 새롭게 상태생성해서 반환
-    return { ...state };
+    return state;
   }
 }
